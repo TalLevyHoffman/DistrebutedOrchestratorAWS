@@ -54,7 +54,7 @@ Below is an overview of the components and steps required for setting up the AWS
    - Create an instance based on the Orchestrator launch template (named **Orchestrator**) that is configured to stop while inactive.
 
 11. **Domain**
-   - Create a domain in Route 53 (e.g., **rgorobotics.org**) to provide a fixed public URL.
+   - Create a domain in Route 53 (e.g., **default.org**) to provide a fixed public URL.
 
 12. **Elastic IP**
     - Allocate an Elastic IP and associate it with the Orchestrator instance so that it has a consistent external IP address.
@@ -67,6 +67,7 @@ Below is an overview of the components and steps required for setting up the AWS
 
 15. **Amazon WorkMail**
     - In Amazon WorkMail, link the **rgorobotics.org** domain to an email address (e.g., **orchestrator@default.org**) for email notifications and communications.
+
 
 
 
