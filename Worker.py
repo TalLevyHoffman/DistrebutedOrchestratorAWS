@@ -54,7 +54,7 @@ shutdown_lock = threading.Lock()
 
 def start_docker_container():
     """
-    Pulls the Docker image 'IM' from Docker Hub and runs a container named 'rgo_container'
+    Pulls the Docker image 'IM' from Docker Hub and runs a container named 'my_container'
     mapping LOCAL_INPUT_DIR to /app/Inputs and LOCAL_OUTPUT_DIR to /app/Outputs.
     """
 
@@ -169,7 +169,7 @@ def run_segmentation():
       run_segmentation.sh <LocalInputPath> <LocalOutputPath>
     """
     try:
-        ShellRunner.exec_in_container('rgo_container', 'run_segmentation.sh',
+        ShellRunner.exec_in_container('my_container', 'run_segmentation.sh',
                                       ['/app/Inputs', '/app/Outputs'])
         return True, ""
     except subprocess.CalledProcessError as e:
@@ -292,7 +292,7 @@ def main():
 
     # Attempt to start the Docker container.
     if not start_docker_container():
-        error_detail = "Failed to start Docker container 'rgo_container'."
+        error_detail = "Failed to start Docker container 'my_container'."
         update_status(worker_id, "failed", {"error": error_detail})
         shutdown_instance()
 
@@ -337,3 +337,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
