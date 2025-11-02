@@ -60,13 +60,14 @@ Below is an overview of the components and steps required for setting up the AWS
     - Allocate an Elastic IP and associate it with the Orchestrator instance so that it has a consistent external IP address.
 
 13. **Route 53 Record**
-    - Create a DNS record in Route 53 that maps the Orchestrator's Elastic IP to a friendly domain name (e.g., **orchestrator.rgorobotics.org**).
+    - Create a DNS record in Route 53 that maps the Orchestrator's Elastic IP to a friendly domain name (e.g., **orchestrator.default.org**).
 
 14. **AWS Systems Manager Parameter Store**
     - Create a parameter (e.g., `/orchestrator/url`) that stores the Orchestrator’s public URL.
 
 15. **Amazon WorkMail**
     - In Amazon WorkMail, link the **rgorobotics.org** domain to an email address (e.g., **orchestrator@default.org**) for email notifications and communications.
+
 
 
 
