@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Orchestrator Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+      th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .log-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #fafafa;
+        max-height: 300px;
+        overflow-y: scroll;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+      h1, h2 {
+        color: #333;
+      }
+	  /* --- Row color classes for different statuses --- */
+      .status-processing {
+        background-color: green;
+        color: #fff;
+      }
+      .status-idle {
+        background-color: darkgray;
+        color: #fff;
+      }
+      .status-shutdown,
+      .status-failed {
+        background-color: red;
+        color: #fff;
+      }
+      .status-unavailable {
+        background-color: blue;
+        color: #fff;
+      }
+      .status-other {
+        background-color: black;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Orchestrator Dashboard</h1>
+    <p>Remaining tasks: {{ remaining_tasks }}</p>
+
+    <h2>Worker Agents</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Worker ID</th>
+          <th>Status</th>
+          <th>Assignment</th>
+          <th>Elapsed Time</th>
+          <th>Time to Timeout</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for worker_id, info in workers.items() %}
+        <tr 
+          class="
+            {% if info.status == 'processing' %}
+              status-processing
+            {% elif info.status == 'idle' %}
+              status-idle
+            {% elif info.status == 'shutting-down' or info.status == 'failed' %}
+              status-shutdown
+            {% elif info.status == 'unavailable' %}
+              status-unavailable
+            {% else %}
+              status-other
+            {% endif %}
+          "
+        >
+          <td>{{ worker_id }}</td>
+          <td>{{ info.status }}</td>
+          <td>
+            {% if info.assignment %}
+              {% if info.assignment.stripped_file_names %}
+                Files: {{ info.assignment.stripped_file_names | join(', ') }}<br>
+              {% elif info.assignment.shutdown %}
+                <strong>Shutdown</strong>: {{ info.assignment.message }}
+              {% else %}
+                No files assigned
+              {% endif %}
+			  <br>Input Bucket: {{ info.assignment.input_bucket }}<br>
+			  Input Prefix: {{ info.assignment.input_prefix }}<br>
+              Output Bucket: {{ info.assignment.output_bucket }}<br>
+              Output Prefix: {{ info.assignment.output_prefix }}
+            {% else %}
+              No active assignment
+            {% endif %}
+          </td>
+          <td>{{ info.elapsed_time }}</td>
+          <td>{{ info.time_to_timeout }}</td>
+          <td>{{ info.details }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Application Logs</h2>
+    <div class="log-container">
+      {% for log in logs %}
+      {{ log }}
+      {% endfor %}
+    </div>
+  </body>
+</html>
+<script>
+  setInterval(function() {
+    window.location.reload();
+  }, 5000); // Reload every 5 seconds
+</script>
