@@ -1,4 +1,4 @@
-# Architecture Overview for Distributed S3 Processing with EC2 Spot Instances
+# Distributed S3 Processing with EC2 Spot Instances
 
 This document describes the architecture for a distributed processing system built on AWS. 
 The solution uses EC2 Spot instances as worker agents that pull file processing tasks from a central orchestrator. 
@@ -186,3 +186,4 @@ This document details the AWS configurations needed for deploying the orchestrat
 
 
 These configurations ensure that your distributed processing system operates securely, reliably, and can scale dynamically using EC2 Spot Instances.
+
