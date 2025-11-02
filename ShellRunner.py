@@ -24,8 +24,8 @@ def exec_in_container(container_name: str, script_name: str, params: List[str]):
         print(f"Return code: {e.returncode}")
         print(f"Output: {e.output}")
 
-def docker_pull_and_mount(mount_dict: dict, container_name: str = 'rgo_container',
-                          image_name: str = 'rgodocker/rgo_seg:latest'):
+def docker_pull_and_mount(mount_dict: dict, container_name: str = 'my_container',
+                          image_name: str = 'mydocker/seg:latest'):
     try:
         cmd = 'docker pull ' + image_name
         print('Pulling Docker image <' + image_name + '> from Docker Hub...')
@@ -61,9 +61,9 @@ def docker_pull_and_mount(mount_dict: dict, container_name: str = 'rgo_container
         print(f"Error pulling and mounting container: {e}")
         return False
 
-def stop_docker_container(container_name: str = 'rgo_container'):
+def stop_docker_container(container_name: str = 'my_container'):
     """
-    Attempts to gracefully stop and remove the Docker container 'rgo_container'.
+    Attempts to gracefully stop and remove the Docker container 'my_container'.
     """
     try:
         print("Stopping Docker container")
@@ -77,4 +77,5 @@ def stop_docker_container(container_name: str = 'rgo_container'):
         return False
 
 if __name__ == "__main__":
-    exec_in_container('rgo_container', 'test_multi_GPU.sh', [])
+    exec_in_container('my_container', 'test_multi_GPU.sh', [])
+
