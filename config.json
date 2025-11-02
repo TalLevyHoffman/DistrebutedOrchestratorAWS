@@ -1,7 +1,8 @@
 {
-  "input_bucket": "rgo.main",
-  "input_prefix": "inputs/wearhouse-1",
-  "output_bucket": "rgo.main",
+  "input_bucket": "bucket.main",
+  "input_prefix": "inputs/Test",
+  "output_bucket": "bucket.main",
   "output_prefix": "output",
   "other_config": "NA"
+
 }
