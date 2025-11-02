@@ -29,7 +29,7 @@ A shared configuration using AWS Systems Manager Parameter Store is used to publ
      - Retrieve the orchestrator URL from AWS Systems Manager Parameter Store.
      - Register with the orchestrator.
      - Pull a designated Docker image from Docker Hub.
-     - Run a container (named **rgo_container**) with volume mappings:
+     - Run a container (named **my_container**) with volume mappings:
        - Maps a local input directory (e.g., `/tmp/input_files`) to `/app/Inputs`.
        - Maps a local output directory (e.g., `/tmp/output_files`) to `/app/Outputs`.
      - Poll for assignments and, when assigned a batch:
@@ -183,5 +183,6 @@ This document details the AWS configurations needed for deploying the orchestrat
 - **IAM Roles:** Include necessary S3, SSM, SES, and EC2 shutdown permissions.
 - **Parameter Store:** Use Parameter Store to dynamically distribute the orchestrator URL.
 - **Optional Load Balancing:** For production environments, consider an ALB with Route 53 for a custom domain and improved resiliency.
+
 
 These configurations ensure that your distributed processing system operates securely, reliably, and can scale dynamically using EC2 Spot Instances.
